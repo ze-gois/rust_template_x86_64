@@ -1,0 +1,32 @@
+[package]
+name = "x86_64_template"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+print = { path = "crates/print" }
+
+[workspace]
+members = ["crates/print"]
+
+[lib]
+name = "x86_64_template"
+path = "src/lib.rs"      # Optional if you want to also expose functionality as a library
+test = false
+
+[[bin]]
+name = "x86_64_template"
+path = "src/main.rs"
+test = false             # This prevents compilation with std for testing
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = "z"
+# rustflags = ["-C", "force-frame-pointers=yes"]
+
+[profile.dev]
+debug = true
+
+[build-dependencies]
+cc = "1.0"
