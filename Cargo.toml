@@ -23,10 +23,10 @@ test = false             # This prevents compilation with std for testing
 lto = true
 codegen-units = 1
 opt-level = "z"
-# rustflags = ["-C", "force-frame-pointers=yes"]
 
 [profile.dev]
 debug = true
+opt-level = 1
 
 [build-dependencies]
 cc = "1.0"

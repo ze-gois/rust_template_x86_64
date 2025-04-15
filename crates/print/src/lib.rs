@@ -1,6 +1,6 @@
 #![no_std]
 
-static CHAR: &[u8; 6] = b"Hello\n";
+static CHAR: &[u8] = b"Test 4: Static crate printing\n";
 
 #[inline(never)]
 pub extern "C" fn print_crate_static() {
@@ -10,7 +10,7 @@ pub extern "C" fn print_crate_static() {
                 "syscall",
                 in("rax") 1usize,
                 in("rdi") 1usize,
-                in("rsi") c,    // Use static instead of stack variable
+                in("rsi") c,
                 in("rdx") 1usize,
                 out("rcx") _,
                 out("r11") _,

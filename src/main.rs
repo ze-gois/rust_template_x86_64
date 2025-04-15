@@ -29,5 +29,5 @@ pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
     print_liblly("Test 2: Lib inline assembly works\n");
     print_crate_static();
     print_crate("Test 3: Crate inline assembly works\n");
-    loop {}
+    panic!("Test 4: Panic works");
 }
