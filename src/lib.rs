@@ -1,23 +1,17 @@
 #![no_std]
 
-pub fn greetings() {
-    let msg = b"Debug: Write syscall called\n";
-    let mut _ret: usize;
-
+pub fn print_liblly(msg: &str) {
+    let bytes = msg.as_bytes();
     unsafe {
         core::arch::asm!(
             "syscall",
             in("rax") 1usize,
-            in("rdi") 1usize, // stderr
-            in("rsi") msg.as_ptr(),
-            in("rdx") msg.len(),
+            in("rdi") 1usize,
+            in("rsi") bytes.as_ptr(),
+            in("rdx") bytes.len(),
             out("rcx") _,
             out("r11") _,
-            lateout("rax") _ret,
+            lateout("rax") _,
         );
     }
-}
-
-pub fn info() {
-    print::print("Template is working!");
 }
