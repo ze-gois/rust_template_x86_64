@@ -29,6 +29,6 @@ pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
     mamod::print("Test 1: Local module inline assembly works\n");
     template::print("Test 2: Lib inline assembly works\n");
     print::print("Test 3: Crate inline assembly works\n");
-    // print::print_static();
+    print::print_static();
     panic!("Test 5: Panic works");
 }
