@@ -1,25 +1,17 @@
 #![no_std]
 
 pub fn print(msg: &str) {
-    // Print entire string at once using write syscall
     let bytes = msg.as_bytes();
-    let ptr = bytes.as_ptr();
-    let len = bytes.len();
     unsafe {
         core::arch::asm!(
-            "mov rax, 1",      // write syscall
-            "mov rdi, 1",      // stdout fd
-            "mov rsi, {0}",    // pointer to string
-            "mov rdx, {1}",    // length of string
             "syscall",
-            in(reg) ptr,
-            in(reg) len,
-            out("rax") _,
+            in("rax") 1usize,
+            in("rdi") 1usize,
+            in("rsi") bytes.as_ptr(),
+            in("rdx") bytes.len(),
             out("rcx") _,
             out("r11") _,
-            out("rdi") _,
-            out("rsi") _,
-            out("rdx") _,
+            lateout("rax") _,
         );
     }
 }
