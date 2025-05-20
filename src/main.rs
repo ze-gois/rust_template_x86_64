@@ -3,10 +3,10 @@
 
 mod panic;
 
-use print::*;
-use x86_64_template::*;
+use print;
+use template;
 
-fn print_locally(msg: &str) {
+fn _print(msg: &str) {
     let bytes = msg.as_bytes();
     unsafe {
         core::arch::asm!(
@@ -24,10 +24,9 @@ fn print_locally(msg: &str) {
 
 #[unsafe(no_mangle)]
 pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
-    // Test 1: Direct inline assembly
-    print_locally("Test 1: Local inline assembly works\n");
-    print_liblly("Test 2: Lib inline assembly works\n");
-    print_crate("Test 3: Crate inline assembly works\n");
-    print_crate_static();
+    _print("Test 1: Local inline assembly works\n");
+    template::print("Test 2: Lib inline assembly works\n");
+    print::print("Test 3: Crate inline assembly works\n");
+    print::print_static();
     panic!("Test 5: Panic works");
 }

@@ -1,5 +1,5 @@
 [package]
-name = "x86_64_template"
+name = "template"
 version = "0.1.0"
 edition = "2024"
 
@@ -10,14 +10,14 @@ print = { path = "crates/print" }
 members = ["crates/print"]
 
 [lib]
-name = "x86_64_template"
-path = "src/lib.rs"      # Optional if you want to also expose functionality as a library
+name = "template"
+path = "src/lib.rs"
 test = false
 
 [[bin]]
-name = "x86_64_template"
+name = "template"
 path = "src/main.rs"
-test = false             # This prevents compilation with std for testing
+test = false
 
 [profile.release]
 lto = true

@@ -1,6 +1,6 @@
 #![no_std]
 
-pub fn print_liblly(msg: &str) {
+pub fn print(msg: &str) {
     let bytes = msg.as_bytes();
     unsafe {
         core::arch::asm!(
@@ -14,4 +14,18 @@ pub fn print_liblly(msg: &str) {
             lateout("rax") _,
         );
     }
+}
+
+pub fn exit() {
+    unsafe {
+        core::arch::asm!(
+            "syscall",
+            in("rax") 0x3c,
+            in("rdi") 0usize,
+            out("rcx") _,
+            out("r11") _,
+            lateout("rax") _,
+        );
+    }
+    unreachable!();
 }
