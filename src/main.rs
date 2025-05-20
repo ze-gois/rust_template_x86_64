@@ -12,23 +12,22 @@ fn _print(msg: &str) {
     unsafe {
         core::arch::asm!(
             "syscall",
-            in("rax") 1usize,
+            inlateout("rax") 1usize => _,
             in("rdi") 1usize,
             in("rsi") bytes.as_ptr(),
             in("rdx") bytes.len(),
             out("rcx") _,
             out("r11") _,
-            lateout("rax") _,
         );
     }
 }
 
 #[unsafe(no_mangle)]
 pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
-    _print("Test 0: Local inline assembly works\n");
-    mamod::print("Test 1: Local module inline assembly works\n");
-    template::print("Test 2: Lib inline assembly works\n");
-    print::print("Test 3: Crate inline assembly works\n");
+    _print("Test 0: src/main.rs\n");
+    mamod::print("Test 1: src/mamod.rs\n");
+    template::print("Test 2: src/lib.rs\n");
+    print::print("Test 3: crates/print/src/lib.rs\n");
     print::print_static();
-    panic!("Test 5: Panic works");
+    panic!("Test 5: src/panic.rs");
 }

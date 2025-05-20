@@ -5,13 +5,13 @@ pub fn print(msg: &str) {
     unsafe {
         core::arch::asm!(
             "syscall",
-            in("rax") 1usize,
+            inlateout("rax") 1usize => _,
             in("rdi") 1usize,
             in("rsi") bytes.as_ptr(),
             in("rdx") bytes.len(),
             out("rcx") _,
             out("r11") _,
-            lateout("rax") _,
+            options(nostack, preserves_flags, readonly)
         );
     }
 }

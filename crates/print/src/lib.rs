@@ -16,7 +16,7 @@ pub fn print(msg: &str) {
     }
 }
 
-static MESSAGE: &[u8] = b"Test 4: Static crate printing\n";
+static MESSAGE: &[u8] = b"Test 4: crates/print/src/lib.rs (static)\n";
 
 #[inline(never)]
 pub extern "C" fn print_static() {
