@@ -11,7 +11,7 @@ pub fn panic(_info: &PanicInfo) -> ! {
     print0("0, ");
     print1("1, ");
     print2("2, ");
-    print2("3, ");
+    print3("3, ");
     print4("4");
 
     let mut count = 5;
