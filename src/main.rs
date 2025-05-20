@@ -18,6 +18,7 @@ fn _print(msg: &str) {
             in("rdx") bytes.len(),
             out("rcx") _,
             out("r11") _,
+            options(nostack, preserves_flags, readonly)
         );
     }
 }
