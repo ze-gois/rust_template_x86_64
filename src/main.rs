@@ -1,6 +1,7 @@
 #![no_std]
 #![no_main]
 
+mod mamod;
 mod panic;
 
 use print;
@@ -24,7 +25,8 @@ fn _print(msg: &str) {
 
 #[unsafe(no_mangle)]
 pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
-    _print("Test 1: Local inline assembly works\n");
+    _print("Test 0: Local inline assembly works\n");
+    mamod::print("Test 1: Local module inline assembly works\n");
     template::print("Test 2: Lib inline assembly works\n");
     print::print("Test 3: Crate inline assembly works\n");
     print::print_static();
