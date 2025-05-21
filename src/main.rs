@@ -1,7 +1,7 @@
 #![no_std]
 #![no_main]
 
-pub mod mamod;
+pub mod amod;
 mod panic;
 
 use print;
@@ -26,7 +26,7 @@ fn _print(msg: &str) {
 #[unsafe(no_mangle)]
 pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
     _print("Test 0: src/main.rs\n");
-    mamod::print("Test 1: src/mamod.rs\n");
+    amod::print("Test 1: src/mamod.rs\n");
     template::print("Test 2: src/lib.rs\n");
     print::print("Test 3: crates/print/src/lib.rs\n");
     print::print_static();

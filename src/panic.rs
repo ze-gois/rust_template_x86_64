@@ -1,7 +1,7 @@
 use core::panic::PanicInfo;
 
 use super::_print as print0;
-use super::mamod::print as print1;
+use super::amod::print as print1;
 use print::print as print3;
 use template::print as print2;
 use template::print as print4;
