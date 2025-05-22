@@ -33,7 +33,8 @@ pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
     template::print("Test 2: src/lib.rs\n");
     print::print("Test 3: crates/print/src/lib.rs\n");
     print::print_static();
-    
+
+    print::info!("Test {}: {}\n", 5, "macro");
     // Trigger panic handler
-    panic!("Test 5: src/panic.rs");
+    panic!("Test 6: src/panic.rs");
 }
