@@ -16,6 +16,23 @@
        mov     %rsp, %rbp
        sub     $16, %rsp        # Reserve some stack space
 
+       # Initialize BSS section to zero
+       # bss_start and bss_end are provided by the linker script
+       mov     $_bss_start, %rax
+       mov     $_bss_end, %rcx
+       cmp     %rcx, %rax
+       je      bss_init_done
+bss_zero_loop:
+       movq    $0, (%rax)
+       add     $8, %rax
+       cmp     %rcx, %rax
+       jl      bss_zero_loop
+bss_init_done:
+       
+       # Initialize any relocations if needed
+       # This would typically be done by the dynamic loader
+       # For our static binary, we don't need much here
+
        # Call the Rust entry point
        call    entry
 

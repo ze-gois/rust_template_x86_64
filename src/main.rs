@@ -7,6 +7,8 @@ mod panic;
 use print;
 use template;
 
+// Simple print function using syscall
+#[inline(always)]
 fn _print(msg: &str) {
     let bytes = msg.as_bytes();
     unsafe {
@@ -25,10 +27,13 @@ fn _print(msg: &str) {
 
 #[unsafe(no_mangle)]
 pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
+    // Run the tests
     _print("Test 0: src/main.rs\n");
     amod::print("Test 1: src/amod.rs\n");
     template::print("Test 2: src/lib.rs\n");
     print::print("Test 3: crates/print/src/lib.rs\n");
     print::print_static();
+    
+    // Trigger panic handler
     panic!("Test 5: src/panic.rs");
 }
