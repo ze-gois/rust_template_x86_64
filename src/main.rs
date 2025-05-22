@@ -1,11 +1,12 @@
 #![no_std]
 #![no_main]
-
 pub mod amod;
 mod panic;
 
 use print;
 use template;
+
+pub struct Writer;
 
 // Simple print function using syscall
 #[inline(always)]
@@ -25,6 +26,22 @@ fn _print(msg: &str) {
     }
 }
 
+impl core::fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> core::fmt::Result {
+        _print(s);
+        Ok(())
+    }
+}
+
+#[macro_export]
+macro_rules! info {
+    ($($arg:tt)*) => {{
+        use core::fmt::Write;
+        let mut writer = Writer;
+        let _ = write!(&mut writer, $($arg)*);
+    }};
+}
+
 #[unsafe(no_mangle)]
 pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
     // Run the tests
@@ -34,7 +51,9 @@ pub extern "C" fn entry(_stack_pointer: *mut u64) -> ! {
     print::print("Test 3: crates/print/src/lib.rs\n");
     print::print_static();
 
-    print::info!("Test {}: {}\n", 5, "macro");
+    print::info!("Test {}: {}\n", 5, "crate macro");
+    template::info!("Test {}: {}\n", 6, "lib macro");
+    info!("Test {}: {}\n", 7, "binary macro");
     // Trigger panic handler
-    panic!("Test 6: src/panic.rs");
+    panic!("Test 8: src/panic.rs");
 }

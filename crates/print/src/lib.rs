@@ -2,8 +2,6 @@
 
 pub struct Writer;
 
-pub static mut WRITER: Writer = Writer;
-
 pub fn print(msg: &str) {
     let bytes = msg.as_bytes();
     unsafe {
@@ -31,9 +29,8 @@ impl core::fmt::Write for Writer {
 macro_rules! info {
     ($($arg:tt)*) => {{
         use core::fmt::Write;
-        unsafe {
-            let _ = write!(&mut $crate::WRITER, $($arg)*);
-        }
+        let mut writer = $crate::Writer;
+        let _ = write!(&mut writer, $($arg)*);
     }};
 }
 

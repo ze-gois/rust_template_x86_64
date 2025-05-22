@@ -1,5 +1,7 @@
 #![no_std]
 
+pub struct Writer;
+
 pub fn print(msg: &str) {
     let bytes = msg.as_bytes();
     unsafe {
@@ -14,6 +16,22 @@ pub fn print(msg: &str) {
             options(nostack, preserves_flags, readonly)
         );
     }
+}
+
+impl core::fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> core::fmt::Result {
+        print(s);
+        Ok(())
+    }
+}
+
+#[macro_export]
+macro_rules! info {
+    ($($arg:tt)*) => {{
+        use core::fmt::Write;
+        let mut writer = $crate::Writer;
+        let _ = write!(&mut writer, $($arg)*);
+    }};
 }
 
 pub fn exit() {
