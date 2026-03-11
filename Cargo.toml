@@ -1,3 +1,6 @@
+[workspace]
+members = ["crates/print"]
+
 [package]
 name = "template"
 version = "0.1.0"
@@ -5,9 +8,6 @@ edition = "2024"
 
 [dependencies]
 print = { path = "crates/print" }
-
-[workspace]
-members = ["crates/print"]
 
 [lib]
 name = "template"
