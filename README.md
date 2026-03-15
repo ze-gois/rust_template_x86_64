@@ -12,3 +12,12 @@ git clone https://github.com/ze-gois/rust_template_x86_64_unix
 cd rust_template_x86_64_unix
 rustup target add x86_64-unknown-none
 ```
+
+# student note
+
+```
+cd ..
+git clone --depth=1 https://github.com/torvalds/linux
+cs linux
+git grep "SYSCALL_DEFINE"
+```
