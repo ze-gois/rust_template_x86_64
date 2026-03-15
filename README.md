@@ -15,6 +15,8 @@ rustup target add x86_64-unknown-none
 
 ### student note
 
+linux's syscalls are met by:
+
 ```
 cd ..
 git clone --depth=1 https://github.com/torvalds/linux
