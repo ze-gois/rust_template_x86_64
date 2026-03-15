@@ -13,7 +13,7 @@ cd rust_template_x86_64_unix
 rustup target add x86_64-unknown-none
 ```
 
-# student note
+### student note
 
 ```
 cd ..
