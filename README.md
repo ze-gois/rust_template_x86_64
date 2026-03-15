@@ -18,6 +18,6 @@ rustup target add x86_64-unknown-none
 ```
 cd ..
 git clone --depth=1 https://github.com/torvalds/linux
-cs linux
+cd linux
 git grep "SYSCALL_DEFINE"
 ```
