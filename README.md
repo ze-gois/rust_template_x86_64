@@ -1,4 +1,4 @@
-```needed are cc and ld```
+```today needed are cc and ld```
 
 ```
 pacman -S binutils gcc llvm
