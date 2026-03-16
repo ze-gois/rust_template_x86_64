@@ -1,7 +1,7 @@
 ```needed are cc and ld```
 
 ```
-pacman -S gcc llvm
+pacman -S binutils gcc llvm
 ```
 
 ```
